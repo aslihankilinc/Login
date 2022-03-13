@@ -76,7 +76,7 @@ class _DirectoryHomeState extends State<DirectoryHome> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => DirectoryDetail()));
+                            builder: (context) => DirectoryDetail(word:word)));
                   },
                   child: SizedBox(
                     height: 50,
