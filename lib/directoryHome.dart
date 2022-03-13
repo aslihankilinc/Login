@@ -14,7 +14,7 @@ class _DirectoryHomeState extends State<DirectoryHome> {
   Future<List<Word>> allWords() async {
     var wordList = <Word>[];
     var w1 = Word(1, "apple", "elma");
-    var w2 = Word(2, "muz", "bananas");
+    var w2 = Word(2, "bananas", "muz");
     var w3 = Word(3, "success", "başarı");
     var w4 = Word(4, "clock", "saat");
     wordList.add(w1);
@@ -28,7 +28,39 @@ class _DirectoryHomeState extends State<DirectoryHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Directory"),
+        title: isSearch
+            ? TextField(
+                decoration: InputDecoration(
+                  hintText: "Search",
+                ),
+                onChanged: (result) {
+                  print("Result:$result");
+                  setState(() {
+                    searchWord = result;
+                  });
+                },
+              )
+            : Text("Directory"),
+        actions: [
+          isSearch
+              ? IconButton(
+                  icon: Icon(Icons.cancel),
+                  onPressed: () {
+                    setState(() {
+                      isSearch = false;
+                      searchWord="";
+                    });
+                  },
+                )
+              : IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    setState(() {
+                      isSearch = true;
+                    });
+                  },
+                ),
+        ],
       ),
       body: FutureBuilder<List<Word>>(
         future: allWords(),
