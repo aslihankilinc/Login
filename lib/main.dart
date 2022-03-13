@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'directoryHome.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -101,7 +103,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           borderRadius: BorderRadius.circular(32.0)),
                       minimumSize: Size(150, 40), //////// HERE
                     ),
-                    onPressed: () {},
+                    onPressed:(){Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DirectoryHome()),
+
+                    );
+                    },
                     child: Text('Login',style: TextStyle(fontSize: 23.0),),
 
                   ),
