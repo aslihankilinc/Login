@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:login/Api/mainApi.dart';
+import 'package:login/models/result.dart';
 
 import 'directoryHome.dart';
 
@@ -38,6 +40,10 @@ class _MyHomePageState extends State<MyHomePage> {
     var screenInfo = MediaQuery.of(context);
     final double screenHeight = screenInfo.size.height;
     final double screenWidth = screenInfo.size.width;
+    var txtUserName = new TextEditingController();
+    var txtPass = new TextEditingController();
+    var result = new Result();
+    final MainApi api = new MainApi();
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
@@ -55,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   padding: EdgeInsets.only(top: 230.0, left: 24.0, right: 24.0),
                   child: TextField(
+                    controller: txtUserName,
                     style: TextStyle(
                       fontSize: 18.0,
                       height: 0.3,
@@ -72,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   padding: EdgeInsets.only(top: 15.0, left: 24.0, right: 24.0),
                   child: TextField(
+                    controller: txtPass,
                     obscureText: true,
                     style: TextStyle(
                       fontSize: 18.0,
@@ -88,11 +96,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(
-                      top: 15.0,
-                      left: 100.0,
-                      right:100.0),
-
+                  padding:
+                      EdgeInsets.only(top: 15.0, left: 100.0, right: 100.0),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green,
@@ -103,17 +108,23 @@ class _MyHomePageState extends State<MyHomePage> {
                           borderRadius: BorderRadius.circular(32.0)),
                       minimumSize: Size(150, 40), //////// HERE
                     ),
-                    onPressed:(){Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => DirectoryHome()),
+                    onPressed: () {
 
-                    );
+                          api.Login(txtUserName.text, txtPass.text) ;
+                      if (1==1) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DirectoryHome()),
+                        );
+                      }
                     },
-                    child: Text('Login',style: TextStyle(fontSize: 23.0),),
-
+                    child: Text(
+                      'Login',
+                      style: TextStyle(fontSize: 23.0),
+                    ),
                   ),
                 ),
-
               ],
             )));
   }
